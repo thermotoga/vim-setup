@@ -1,0 +1,23 @@
+set smarttab               "Uses shiftwidth instead of tabstop at start of lines
+set expandtab              "Replaces a <TAB> with spaces = portable 
+set bg=light
+set backup
+set directory=/tmp/
+set backupdir=/tmp/
+
+autocmd! BufNewFile,BufReadPre,FileReadPre  *.py    so ~/.vim/python.vim
+autocmd! BufNewFile,BufReadPre,FileReadPre  *.rb    so ~/.vim/ruby.vim
+autocmd! BufNewFile,BufReadPre,FileReadPre  *.erb    so ~/.vim/ruby.vim
+nore ; :
+nore , ;
+
+"this will make an abbreviaton, use with RuL
+iab RuL ----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0
+
+"typo fixes
+so ~/.vim/typos.vim
+
+"make Ctrl-v to work like Ctrl-c in insert mode
+imap <C-v> <C-c>
+
+
