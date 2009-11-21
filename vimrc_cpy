@@ -1,9 +1,15 @@
+filetype plugin indent on  "plugins and indent on
+set autoindent
 set smarttab               "Uses shiftwidth instead of tabstop at start of lines
 set expandtab              "Replaces a <TAB> with spaces = portable 
 set bg=light
 set backup
 set directory=/tmp/
 set backupdir=/tmp/
+
+set incsearch               "incremental search
+set smartcase               "ignores case when everything is lower case
+set textwidth=78
 
 autocmd! BufNewFile,BufReadPre,FileReadPre  *.py    so ~/.vim/python.vim
 autocmd! BufNewFile,BufReadPre,FileReadPre  *.rb    so ~/.vim/ruby.vim
