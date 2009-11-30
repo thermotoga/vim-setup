@@ -1,23 +1,72 @@
 filetype plugin indent on  "plugins and indent on
+filetype on
+filetype plugin on
+syntax on
+set nocompatible
+
 set autoindent
-set smarttab               "Uses shiftwidth instead of tabstop at start of lines
+set smarttab               "Uses shiftwidth instead of tabstop 
 set expandtab              "Replaces a <TAB> with spaces = portable 
+set virtualedit=block       "Lets you go everywhere (in visual mode)
+
 set bg=light
 set backup
 set directory=/tmp/
 set backupdir=/tmp/
 
+set visualbell t_vb=
+set noerrorbells
+set ruler                   "show the line and column number
+set showcmd                 "show last command
+set showmatch               "show matching bracket briefly 
+set wildmenu
+set wildmode=list:longest,full
+set number
+
 set incsearch               "incremental search
+set hlsearch                "highlight search results
 set smartcase               "ignores case when everything is lower case
 set textwidth=78
 
+set tabstop=4               "change default tabsize
+set shiftwidth=4
+set softtabstop=4
+
+"mappings
+nmap <F2> :set spell!<CR>
+nmap <F6> :call Toggle_syntax()<CR>
+nmap <F7> :set wrap!<CR>
+nmap <F8> :set paste!<CR>
+nmap <F9> :set number!<CR>
+
+" search next/previous -- center in page
+nmap n nzz
+nmap N Nzz
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TOGGLERS -- for F-keys
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+ 
+function! Toggle_syntax()
+  if has("syntax_items")
+    syntax off
+    echo "syntax off"
+  else
+    syntax enable
+    echo "syntax on"
+  endif
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Read in language specific files
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd! BufNewFile,BufReadPre,FileReadPre  *.py    so ~/.vim/python.vim
 autocmd! BufNewFile,BufReadPre,FileReadPre  *.rb    so ~/.vim/ruby.vim
 autocmd! BufNewFile,BufReadPre,FileReadPre  *.erb    so ~/.vim/ruby.vim
 nore ; :
 nore , ;
 
-"this will make an abbreviaton, use with RuL
+"this will make an abbreviation, use with RuL
 iab RuL ----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0
 
 "typo fixes
