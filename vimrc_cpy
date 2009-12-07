@@ -9,7 +9,7 @@ set smarttab               "Uses shiftwidth instead of tabstop
 set expandtab              "Replaces a <TAB> with spaces = portable 
 set virtualedit=block       "Lets you go everywhere (in visual mode)
 
-set bg=light
+set bg=dark
 set backup
 set directory=/tmp/
 set backupdir=/tmp/
@@ -25,6 +25,7 @@ set number
 
 set incsearch               "incremental search
 set hlsearch                "highlight search results
+set ignorecase              "is needed for smartcase
 set smartcase               "ignores case when everything is lower case
 set textwidth=78
 
