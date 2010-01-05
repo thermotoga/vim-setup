@@ -593,6 +593,8 @@ function! Tex_CompileMultipleTimes()
 		let runCount = runCount + 1
 	endwhile
 
+	"bug http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=365572
+	redraw!
 	call Tex_Debug("Tex_CompileMultipleTimes: Ran latex ".runCount." time(s)", "comp")
 	echomsg "Ran latex ".runCount." time(s)"
 
