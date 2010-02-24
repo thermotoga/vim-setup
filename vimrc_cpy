@@ -1,3 +1,5 @@
+"where to find nice .vimrc files
+"   -http://stefanjahn.de/unix:vim:meine_.vimrc
 filetype plugin indent on  "plugins and indent on
 filetype on
 filetype plugin on
@@ -28,7 +30,14 @@ set incsearch               "incremental search
 set hlsearch                "highlight search results
 set ignorecase              "is needed for smartcase
 set smartcase               "ignores case when everything is lower case
-set textwidth=78
+"set textwidth=78
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+
+set laststatus=1            "always show staus bar
+set hidden                  "switch buffers withoug saving
+set mouse=""                "disable mouse
+set showbreak=>>>           "when wrapping occurs
+
 
 set tabstop=4               "change default tabsize
 set shiftwidth=4
@@ -51,10 +60,16 @@ nmap <F6> :call Toggle_syntax()<CR>
 nmap <F7> :set wrap!<CR>
 nmap <F8> :set paste!<CR>
 nmap <F9> :set number!<CR>
+nmap <F12> :call WrongKeyboard()<CR>
 
 " search next/previous -- center in page
 nmap n nzz
 nmap N Nzz
+
+"surround stuff
+"html div with id
+let g:surround_{char2nr("d")} = "<div\1id: \r..*\r id=\"&\"\1>\r</div>"
+let g:surround_{char2nr("c")} = "/* \r */"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TOGGLERS -- for F-keys
@@ -75,7 +90,13 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd! BufNewFile,BufReadPre,FileReadPre  *.py    so ~/.vim/python.vim
 autocmd! BufNewFile,BufReadPre,FileReadPre  *.rb    so ~/.vim/ruby.vim
-autocmd! BufNewFile,BufReadPre,FileReadPre  *.erb    so ~/.vim/ruby.vim
+autocmd! BufNewFile,BufReadPre,FileReadPre  *.erb   so ~/.vim/ruby.vim
+autocmd! BufNewFile,BufReadPre,FileReadPre  *.rake  so ~/.vim/ruby.vim
+"set all files where the 80 character limit should be set
+autocmd! BufNewFile,BufReadPre,FileReadPre  *.c,*.cpp,*.php,*.sh,*.java,*.js,*.pl,*.css,*.py,*.R match OverLength /\%81v.\+/
+autocmd! BufNewFile,BufReadPre,FileReadPre  *.rb,*.erb,*.rake match OverLength /\%81v.\+/
+autocmd! BufNewFile,BufReadPre,FileReadPre  *.html,*.tex match OverLength /\%81v.\+/
+
 nore ; :
 nore , ;
 
@@ -84,6 +105,16 @@ iab RuL ----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
 
 "typo fixes
 so ~/.vim/typos.vim
+
+"if you used a german keyboard, y and z are interchanged
+function! WrongKeyboard()
+    exe '%s/Y/XXXXXXXXtmpBigXXXXXXX/ge'
+    exe '%s/y/XXXXXXXXtmpXXXXXXX/ge'
+    exe '%s/Z/Y/ge'
+    exe '%s/z/y/ge'
+    exe '%s/XXXXXXXXtmpBigXXXXXXX/Z/ge'
+    exe '%s/XXXXXXXXtmpXXXXXXX/z/ge'
+endfunction
 
 "make Ctrl-v to work like Ctrl-c in insert mode
 imap <C-v> <C-c>
