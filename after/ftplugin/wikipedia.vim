@@ -50,3 +50,10 @@ inoremap <buffer> <silent> = <C-R>=(getline('.')==''\|\|getline('.')=~'^=\+$')?"
 :set foldexpr=getline(v:lnum)=~'^\\(=\\+\\)[^=]\\+\\1\\(\\s*<!--.*-->\\)\\=\\s*$'?\">\".(len(matchstr(getline(v:lnum),'^=\\+'))-1):\"=\"
 :set fdm=expr
 
+
+" Surround plugin on w, l and c, r
+let b:surround_119 = "[[\r]]"
+let b:surround_108 = "[[\r]]"
+let b:surround_99 = "<!-- \r -->"
+let b:surround_114 = "<ref> \r </ref>"
+
