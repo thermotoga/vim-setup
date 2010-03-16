@@ -36,7 +36,7 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 set laststatus=1            "always show staus bar
 set hidden                  "switch buffers withoug saving
 set mouse=""                "disable mouse
-set showbreak=>>>           "when wrapping occurs
+set showbreak=>           "when wrapping occurs
 
 
 set tabstop=4               "change default tabsize
@@ -70,6 +70,14 @@ nmap N Nzz
 "html div with id
 let g:surround_{char2nr("d")} = "<div\1id: \r..*\r id=\"&\"\1>\r</div>"
 let g:surround_{char2nr("c")} = "/* \r */"
+
+"save folds
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview 
+""will save fold info ONLY
+"usefull e.g. when using gvimdiff at the same time:
+"http://old.nabble.com/Save-folds...-and-only-folds-td23096829.html
+"set viewoptions=folds  
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TOGGLERS -- for F-keys
