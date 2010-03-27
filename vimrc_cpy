@@ -105,6 +105,10 @@ autocmd! BufNewFile,BufReadPre,FileReadPre  *.c,*.cpp,*.php,*.sh,*.java,*.js,*.p
 autocmd! BufNewFile,BufReadPre,FileReadPre  *.rb,*.erb,*.rake match OverLength /\%81v.\+/
 autocmd! BufNewFile,BufReadPre,FileReadPre  *.html,*.tex match OverLength /\%81v.\+/
 
+"abbreviations: single charachter NEED to be preceeded by a space!
+"replace hyphen automatically
+iab -h \hyp{}
+iab hh \hyp{}
 nore ; :
 nore , ;
 

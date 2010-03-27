@@ -518,6 +518,7 @@ function! Tex_CompileMultipleTimes()
 
 	let idxFileName = mainFileName_root.'.idx'
 	let auxFileName = mainFileName_root.'.aux'
+	let gloFileName = mainFileName_root.'.nlo'
 
 	let runCount = 0
 	let needToRerun = 1
@@ -526,6 +527,7 @@ function! Tex_CompileMultipleTimes()
 		let needToRerun = 0
 
 		let idxlinesBefore = Tex_CatFile(idxFileName)
+		let glolinesBefore = Tex_CatFile(gloFileName)
 		let auxlinesBefore = Tex_GetAuxFile(auxFileName)
 
 		" first run latex.
@@ -547,6 +549,7 @@ function! Tex_CompileMultipleTimes()
 		endif
 
 		let idxlinesAfter = Tex_CatFile(idxFileName)
+		let glolinesAfter = Tex_CatFile(gloFileName)
 
 		" If .idx file changed, then run makeindex to generate the new .ind
 		" file and remember to rerun latex.
@@ -554,6 +557,18 @@ function! Tex_CompileMultipleTimes()
 			echomsg "Running makeindex..."
 			let temp_mp = &mp | let &mp = Tex_GetVarValue('Tex_MakeIndexFlavor')
 			exec 'silent! make '.mainFileName_root
+			let &mp = temp_mp
+
+			let needToRerun = 1
+		endif
+		
+		" If .glo file changed, then run makeindex to generate the new .glo
+		" file and remember to rerun latex.
+		"http://www.mail-archive.com/vim-latex-devel@lists.sourceforge.net/msg00310.html
+		if runCount == 0 && glob(gloFileName) != '' && glolinesBefore != glolinesAfter
+			echomsg "Running makeindex for glossary..."
+			let temp_mp = &mp | let &mp = Tex_GetVarValue('Tex_MakeIndexFlavor')
+			exec 'silent! make '.gloFileName.' -s nomencl.ist -o '.mainFileName_root.'.nls'
 			let &mp = temp_mp
 
 			let needToRerun = 1
