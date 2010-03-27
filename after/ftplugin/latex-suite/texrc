@@ -238,7 +238,7 @@ TexLet g:Tex_BibtexFlavor = 'bibtex'
 
 " specifies the MakeIndedx flavor and if necessary options. $* will be
 " replaced by the *root* of the main file name. See above.
-TexLet g:Tex_MakeIndexFlavor = 'makeindex $*.idx'
+TexLet g:Tex_MakeIndexFlavor = 'makeindex'
 
 " By default the program described by g:Tex_Flavor above is called with the
 " flags '--src-specials --interaction=nonstopmode'. If your particular version
