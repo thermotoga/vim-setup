@@ -12,12 +12,12 @@ noremap <buffer> k gk
 noremap <buffer> j gj
 noremap <buffer> <Up> gk
 noremap <buffer> <Down> gj
-noremap <buffer> 0 g0
-noremap <buffer> ^ g^
-noremap <buffer> $ g$
-noremap <buffer> D dg$ 
-noremap <buffer> C cg$ 
-noremap <buffer> A g$a
+"noremap <buffer> 0 g0
+"noremap <buffer> ^ g^
+"noremap <buffer> $ g$
+"noremap <buffer> D dg$ 
+"noremap <buffer> C cg$ 
+"noremap <buffer> A g$a
 
 inoremap <buffer> <Up> <C-O>gk
 inoremap <buffer> <Down> <C-O>gj
@@ -50,10 +50,17 @@ inoremap <buffer> <silent> = <C-R>=(getline('.')==''\|\|getline('.')=~'^=\+$')?"
 :set foldexpr=getline(v:lnum)=~'^\\(=\\+\\)[^=]\\+\\1\\(\\s*<!--.*-->\\)\\=\\s*$'?\">\".(len(matchstr(getline(v:lnum),'^=\\+'))-1):\"=\"
 :set fdm=expr
 
-
 " Surround plugin on w, l and c, r
-let b:surround_119 = "[[\r]]"
-let b:surround_108 = "[[\r]]"
-let b:surround_99 = "<!-- \r -->"
-let b:surround_114 = "<ref> \r </ref>"
+let b:surround_119 = "[[\r]]"  "w = wiki
+let b:surround_108 = "[[\r]]"  "l = link
+let b:surround_99 = "<!-- \r -->" "c = comment
+let b:surround_114 = "<ref> \r </ref>" "r = references
+let b:surround_105 = "''\r''" "i = italic
+let b:surround_98 = "'''\r''''"  "b = boldface""
 
+iab hdaten {{subst:Benutzer:Hannes Röst/Vorlage/NeueDaten}}
+iab datenh {{subst:Benutzer:Hannes Röst/Vorlage/NeueDaten}}
+iab hsign Gruss --~~~~
+
+"iab hrefs == Einzelnachweise 
+"\<CR> <references/>
