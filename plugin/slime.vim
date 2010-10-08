@@ -2,13 +2,26 @@
 "to whom all credit belongs
 "slight modifications by Hannes Röst
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function Pythonify(text)
+  "Here we create the correct 'indentation' for the text by
+  "counting the leading spaces (extra_spaces) and then deleting those
+  let mytext=a:text
+  let extra_spaces = matchstr(mytext,'^\( \)\+')
+  let mytext = substitute(mytext, "^" . extra_spaces , "", 'g')
+  let mytext = substitute(mytext, "\n" . extra_spaces , "\n", 'g')
+  return mytext
+endfunction
+
 function Send_to_Screen(text)
   if !exists("g:screen_sessionname") || !exists("g:screen_windowname")
     call Screen_Vars()
   end
 
-  echo system("screen -S " . g:screen_sessionname . " -p " . g:screen_windowname . " -X stuff '" . substitute(a:text, "'", "'\\\\''", 'g') . "'")
+  let modtext=Pythonify(a:text)
+  echo system("screen -S " . g:screen_sessionname . " -p " . g:screen_windowname . " -X stuff '" . substitute(modtext, "'", "'\\\\''", 'g') . "'")
 endfunction
+
 
 function Screen_Session_Names(A,L,P)
   return system("screen -ls | awk '/Attached/ {print $1}'")
