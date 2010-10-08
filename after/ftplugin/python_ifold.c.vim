@@ -16,7 +16,7 @@ if !exists("g:ifold_mode")
     let g:ifold_mode = 1
 endif
 
-map <buffer> f :call ToggleFold()<CR> 
+map <buffer> myfold :call ToggleFold()<CR> 
 
 set tabstop=4
 set softtabstop=4
@@ -213,8 +213,10 @@ function! ToggleFold()
     let w:signature = 0
     if w:is_folded
         set foldexpr=0
+        set foldcolumn=0
         let w:is_folded = 0
     else
+        set foldcolumn=1
         call ReFold()
         " Open the fold we are in
         exec 'norm! zO'

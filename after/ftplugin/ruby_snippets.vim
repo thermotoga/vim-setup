@@ -1,3 +1,5 @@
+set tabstop=2
+
 if !exists('loaded_snippet') || &cp
     finish
 endif
