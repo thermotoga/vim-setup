@@ -1,15 +1,17 @@
 "Slime.vim from Jonathan Palardy from http://technotales.wordpress.com
 "to whom all credit belongs
-"slight modifications by Hannes Röst
+"slight modifications by Hannes Röst (and Rahul who commented on the blog)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function Pythonify(text)
   "Here we create the correct 'indentation' for the text by
   "counting the leading spaces (extra_spaces) and then deleting those
+  "It also fixes the problem with extra newlines in the Python interpreter
   let mytext=a:text
   let extra_spaces = matchstr(mytext,'^\( \)\+')
   let mytext = substitute(mytext, "^" . extra_spaces , "", 'g')
   let mytext = substitute(mytext, "\n" . extra_spaces , "\n", 'g')
+  let mytext = substitute(mytext, '\n\s*\n\+', '\n', 'g') 
   return mytext
 endfunction
 
