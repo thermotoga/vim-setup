@@ -12,30 +12,20 @@ set smarttab               "Uses shiftwidth instead of tabstop
 set expandtab              "Replaces a <TAB> with spaces = portable 
 set virtualedit=block       "Lets you go everywhere (in visual mode)
 
-"learn vimstyle keys
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
 
 set bg=dark
 set nobackup
 set noswapfile
 
-set visualbell t_vb=
-set noerrorbells
-set ruler                   "show the line and column number
-set showcmd                 "show last command
-set showmatch               "show matching bracket briefly 
-set wildmenu
-set wildmode=list:longest,full
-set number
-
 set incsearch               "incremental search
 set hlsearch                "highlight search results
 set ignorecase              "is needed for smartcase
 set smartcase               "ignores case when everything is lower case
+set gdefault                "always set /g
 "set textwidth=78
+"dont use crazy regex
+nnoremap / /\v
+vnoremap / /\v
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 
 set laststatus=1            "always show staus bar
@@ -43,15 +33,37 @@ set hidden                  "switch buffers without saving
 set mouse=""                "disable mouse
 set showbreak=            "when wrapping occurs
 
-
 set tabstop=4               "change default tabsize
 set shiftwidth=4
 set softtabstop=4
 
+"change leader key
+let mapleader = ","
+
+"learn vimstyle keys
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+inoremap jj <ESC>
+
+"save on lost focus
+au FocusLost * :wa
+
 "whenever the sudo vim was forgotten
 cmap w!! w !sudo tee % >/dev/null 
 "turn off hlsearch
-nmap <silent> \/ :nohlsearch<CR>  
+nmap <silent> <leader>/ :nohlsearch<CR>  
 
 "LaTeX plugin 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
@@ -80,6 +92,7 @@ nmap N Nzz
 "html div with id
 let g:surround_{char2nr("d")} = "<div\1id: \r..*\r id=\"&\"\1>\r</div>"
 let g:surround_{char2nr("c")} = "/* \r */"
+let g:surround_{char2nr("s")} = "\"\"\" \r \"\"\""
 
 "save folds
 au BufWinLeave * mkview
@@ -141,4 +154,9 @@ endfunction
 "make Ctrl-v to work like Ctrl-c in insert mode
 imap <C-v> <C-c>
 
-
+"splits
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
